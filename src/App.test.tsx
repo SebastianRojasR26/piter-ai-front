@@ -62,8 +62,8 @@ it("presenta funciones en /inicio con CTAs al chat", () => {
   );
   expect(
     screen
-      .getByRole("link", { name: "Resuelve tu primera duda" })
+      .getByRole("link", { name: "Hablemos de tu duda" })
       .getAttribute("href"),
   ).toBe("/");
-  expect(document.title).toBe("Funciones · PiterAi");
+  expect(document.title).toBe("PiterAi · Claridad para tus impuestos");
 });

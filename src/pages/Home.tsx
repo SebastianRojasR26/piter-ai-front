@@ -1,210 +1,384 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  ArrowUp,
-  BookOpen,
+  ArrowUpRight,
   Check,
+  BookOpen,
+  Layers3,
+  Clock3,
   MessageSquare,
   ShieldCheck,
   Sparkles,
+  Plus,
+  Menu,
+  X,
 } from "lucide-react";
-import Header from "../components/Header";
 import Logo from "../components/Logo";
-import Disclaimer from "../components/Disclaimer";
-import ProductDetails from "../components/ProductDetails";
+import ThemeToggle from "../components/ThemeToggle";
+import "../styles/editorial.css";
+const benefits = [
+  {
+    icon: BookOpen,
+    title: "El respaldo importa.",
+    text: "Una orientación se entiende mejor con el artículo aplicable y su vigencia. Revisa las fuentes antes de tomar una decisión.",
+  },
+  {
+    icon: Layers3,
+    title: "Contexto colombiano.",
+    text: "Estatuto Tributario, DUR 1625, jurisprudencia y doctrina DIAN: conoce las fuentes que orientan una consulta tributaria.",
+  },
+  {
+    icon: Clock3,
+    title: "A tu propio ritmo.",
+    text: "Plantea una duda, añade contexto y vuelve a los mensajes anteriores. Una conversación que avanza contigo.",
+  },
+];
+const plans = [
+  {
+    name: "Gratis",
+    price: "$0",
+    quota: "5 consultas / mes",
+    description: "Para dar el primer paso.",
+    features: [
+      "Estatuto Tributario completo",
+      "Historial de conversaciones",
+      "Citas de artículo y vigencia",
+    ],
+    recommended: false,
+  },
+  {
+    name: "Lite",
+    price: "$29.900",
+    quota: "10 consultas / mes",
+    description: "Para dudas puntuales.",
+    features: ["Todo lo incluido en Gratis", "Más consultas cada mes"],
+    recommended: false,
+  },
+  {
+    name: "Standard",
+    price: "$49.900",
+    quota: "100 consultas / mes",
+    description: "Para tu práctica cotidiana.",
+    features: ["Todo lo incluido en Lite", "Mayor capacidad mensual"],
+    recommended: true,
+  },
+  {
+    name: "Power",
+    price: "$99.900",
+    quota: "Consultas ilimitadas",
+    description: "Para un uso intensivo.",
+    features: ["Todo lo incluido en Standard", "Sin límite de consultas"],
+    recommended: false,
+  },
+];
+const questions = [
+  {
+    title: "¿Sobre qué puedo preguntar?",
+    text: "Puedes explorar renta, IVA, retenciones, RUT y Régimen Simple de Tributación. Añade el contexto de tu situación para que la conversación sea más útil.",
+  },
+  {
+    title: "¿Qué significan las fuentes normativas?",
+    text: "Son el respaldo de una orientación: normas, artículos, jurisprudencia y doctrina. Revisa su vigencia y cómo aplican a tu caso con un profesional.",
+  },
+  {
+    title: "¿Puedo contratar un plan aquí?",
+    text: "Esta página muestra los planes publicados como información. Esta demostración no permite contratar, pagar ni activar suscripciones. Los precios y límites no se aplican al chat de prueba.",
+  },
+  {
+    title: "¿Las respuestas reemplazan a un contador?",
+    text: "No. La orientación ayuda a entender conceptos y preparar preguntas. Un contador o asesor tributario debe revisar las decisiones de tu caso particular.",
+  },
+];
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    document.title = "Funciones · PiterAi";
+    document.title = "PiterAi · Claridad para tus impuestos";
   }, []);
   return (
-    <>
-      <Header />
-      <main className="home">
-        <section className="hero container">
-          <div className="hero-copy">
-            <div className="eyebrow">
-              <span className="dot" /> TU ALIADO TRIBUTARIO EN COLOMBIA
-            </div>
-            <h1>
-              Menos dudas.
-              <br />
-              Más <span>tranquilidad.</span>
-            </h1>
-            <p className="hero-description">
-              Tus impuestos no tienen por qué ser un enredo. Conversa con
-              PiterAi y encuentra un punto de partida claro para tus decisiones
-              tributarias.
-            </p>
-            <Link to="/" className="button">
-              Resuelve tu primera duda <ArrowRight size={19} />
+    <div className="editorial">
+      <header
+        className="ed-header"
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && menuOpen) {
+            setMenuOpen(false);
+            menuButton.current?.focus();
+          }
+        }}
+      >
+        <div className="ed-wrap ed-nav">
+          <Logo />
+          <nav
+            className={menuOpen ? "ed-links is-open" : "ed-links"}
+            id="ed-navigation"
+            aria-label="Navegación principal"
+          >
+            <a href="#funciones" onClick={() => setMenuOpen(false)}>
+              Cómo te ayuda
+            </a>
+            <a href="#planes" onClick={() => setMenuOpen(false)}>
+              Planes
+            </a>
+            <a href="#preguntas" onClick={() => setMenuOpen(false)}>
+              Preguntas
+            </a>
+          </nav>
+          <div className="ed-nav-actions">
+            <ThemeToggle />
+            <Link className="ed-link-chat" to="/">
+              Abrir chat <ArrowUpRight size={17} aria-hidden="true" />
             </Link>
-            <p className="hero-note">
-              <Check size={15} /> Sin formularios complicados. A tu ritmo.
-            </p>
-            <div className="hero-topics">
-              <span>Renta</span>
-              <span>IVA</span>
-              <span>RUT</span>
-              <span>Retenciones</span>
-            </div>
+            <button
+              ref={menuButton}
+              className="icon-button ed-menu"
+              aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={menuOpen}
+              aria-controls="ed-navigation"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X /> : <Menu />}
+            </button>
           </div>
-          <div className="hero-visual">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="floating-label">
-              <Sparkles size={15} /> La claridad empieza aquí
+        </div>
+      </header>
+      <main>
+        <section className="ed-hero ed-wrap">
+          <div className="ed-hero-copy">
+            <p className="ed-kicker">
+              <span /> TU IMPULSO TRIBUTARIO
+            </p>
+            <h1>
+              Tus impuestos.
+              <br />
+              Más claros.
+              <br />
+              <em>Más cerca.</em>
+            </h1>
+            <p className="ed-intro">
+              Una pregunta puede cambiar la forma en que entiendes tus
+              impuestos. Empieza una conversación con PiterAi.
+            </p>
+            <div className="ed-hero-actions">
+              <Link className="ed-button" to="/">
+                Hablemos de tu duda <ArrowRight size={20} aria-hidden="true" />
+              </Link>
+              <a className="ed-text-link" href="#planes">
+                Conoce los planes
+              </a>
             </div>
-            <div className="preview-card">
-              <div className="preview-header">
-                <div className="assistant-icon">
-                  <img src="/brand/icon-light.png" alt="" />
+            <p className="ed-small">
+              <ShieldCheck size={15} aria-hidden="true" /> Prueba en modo
+              demostración. Sin pagos.
+            </p>
+          </div>
+          <div className="ed-demo">
+            <div className="ed-demo-label">
+              <Sparkles size={17} aria-hidden="true" /> DE LA DUDA A LA CLARIDAD{" "}
+              <span>01 / 03</span>
+            </div>
+            <div className="ed-demo-chat">
+              <div className="ed-demo-heading">
+                <div className="ed-avatar">
+                  <MessageSquare size={24} aria-hidden="true" />
                 </div>
                 <div>
                   <strong>PiterAi</strong>
-                  <span>Tu impulso Tributario</span>
+                  <p>Tu aliado para entender</p>
                 </div>
-                <span className="preview-status">
-                  <span className="dot" /> Asistente
-                </span>
+                <span className="ed-status">Demo</span>
               </div>
-              <div className="preview-body">
-                <p className="preview-user">
-                  ¿Declarar renta significa que debo pagar?
-                </p>
-                <div className="preview-answer">
-                  <Sparkles size={19} />
-                  <div>
-                    <strong>Son dos cosas distintas.</strong>
-                    <p>
-                      Presentar una declaración no significa necesariamente que
-                      tengas un impuesto a pagar.
-                    </p>
-                    <p>Vamos paso a paso para entender tu situación.</p>
-                    <span className="sample-tag">Ejemplo de conversación</span>
-                  </div>
+              <div className="ed-question">
+                ¿Declarar renta significa que debo pagar?
+              </div>
+              <div className="ed-answer">
+                <Sparkles size={19} aria-hidden="true" />
+                <div>
+                  <strong>Son dos cosas distintas.</strong>
+                  <p>
+                    Presentar una declaración no significa necesariamente que
+                    tengas un impuesto a pagar.
+                  </p>
+                  <p>
+                    El resultado depende de tu situación. Vamos paso a paso.
+                  </p>
                 </div>
-                <Link to="/" className="preview-input">
-                  Escribe tu pregunta…
-                  <span>
-                    <ArrowUp size={18} />
-                  </span>
-                </Link>
               </div>
+              <div className="ed-example-source">
+                <BookOpen size={15} aria-hidden="true" /> Ejemplo ilustrativo de
+                conversación
+              </div>
+              <Link to="/" className="ed-demo-input">
+                Escribe tu primera pregunta{" "}
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </Link>
             </div>
-            <div className="visual-caption">
-              <ShieldCheck size={18} />
-              <span>
-                Preguntas reales.
-                <br />
-                <strong>Explicaciones que entiendes.</strong>
-              </span>
+            <div className="ed-demo-foot">
+              <span>Lenguaje cercano.</span>
+              <span>Contexto colombiano.</span>
             </div>
           </div>
         </section>
-        <div className="trust-strip">
-          <div className="container">
-            <span>Un impulso para cada paso</span>
-            <span>
-              <MessageSquare size={18} /> Lenguaje cercano
-            </span>
-            <span>
-              <BookOpen size={18} /> Contexto colombiano
-            </span>
-            <span>
-              <ShieldCheck size={18} /> Orientación responsable
-            </span>
+        <div className="ed-topics">
+          <div className="ed-wrap">
+            <span>CONVERSEMOS SOBRE</span>
+            {["Renta", "IVA", "Retenciones", "RUT", "Régimen Simple"].map(
+              (topic) => (
+                <span key={topic}>
+                  {topic}
+                  <Plus size={14} aria-hidden="true" />
+                </span>
+              ),
+            )}
           </div>
         </div>
-        <section className="features container" id="funciones">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">CLARIDAD PARA TU DÍA A DÍA</p>
-              <h2>
-                Un tema complejo.
-                <br />
-                Una conversación sencilla.
-              </h2>
-            </div>
+        <section className="ed-section ed-wrap" id="funciones">
+          <div className="ed-section-heading">
+            <p className="ed-kicker">01 — UNA MEJOR CONVERSACIÓN</p>
+            <h2>
+              Menos vueltas.
+              <br />
+              Más contexto.
+            </h2>
             <p>
-              Desde esa primera pregunta hasta entender qué necesitas revisar
-              con tu contador.
+              No necesitas dominar el lenguaje tributario para empezar. Trae tu
+              pregunta; avancemos desde ahí.
             </p>
           </div>
-          <div className="feature-grid">
-            {[
-              {
-                icon: MessageSquare,
-                number: "01",
-                title: "Pregunta como hablas",
-                text: "No necesitas conocer el término exacto. Cuéntanos tu duda con tus propias palabras.",
-              },
-              {
-                icon: BookOpen,
-                number: "02",
-                title: "Entiende el siguiente paso",
-                text: "Explora conceptos tributarios y organiza la información que necesitas para tu caso.",
-              },
-              {
-                icon: ShieldCheck,
-                number: "03",
-                title: "Decide con más contexto",
-                text: "Llega mejor preparado a una conversación con tu contador o asesor tributario.",
-              },
-            ].map(({ icon: Icon, number, title, text }) => (
-              <article className="feature-card" key={number}>
-                <div className="feature-top">
-                  <Icon size={25} />
-                  <span>{number}</span>
+          <div className="ed-benefits">
+            {benefits.map(({ icon: Icon, title, text }, index) => (
+              <article key={title}>
+                <div className="ed-benefit-top">
+                  <Icon size={27} aria-hidden="true" />
+                  <span>0{index + 1}</span>
                 </div>
                 <h3>{title}</h3>
                 <p>{text}</p>
               </article>
             ))}
           </div>
+          <div className="ed-process">
+            <h3>Así de sencillo.</h3>
+            {[
+              "Pregunta con tus palabras",
+              "Añade el contexto de tu caso",
+              "Revisa la orientación con un profesional",
+            ].map((step, index) => (
+              <div key={step}>
+                <span>{index + 1}</span>
+                <p>{step}</p>
+              </div>
+            ))}
+          </div>
         </section>
-        <section className="how container">
+        <section className="ed-pricing" id="planes">
+          <div className="ed-wrap">
+            <div className="ed-section-heading">
+              <p className="ed-kicker">02 — UN PLAN PARA CADA RITMO</p>
+              <h2>
+                Empieza pequeño.
+                <br />
+                Crece con tus preguntas.
+              </h2>
+              <p>
+                Cuatro opciones, desde la primera duda hasta el uso intensivo.
+                Precios publicados en pesos colombianos.
+              </p>
+            </div>
+            <div className="ed-plans">
+              {plans.map((plan) => (
+                <article
+                  className={
+                    plan.recommended ? "ed-plan ed-plan-featured" : "ed-plan"
+                  }
+                  key={plan.name}
+                >
+                  <div className="ed-plan-label">
+                    <h3>{plan.name}</h3>
+                    {plan.recommended && <span>Recomendado</span>}
+                  </div>
+                  <p className="ed-plan-description">{plan.description}</p>
+                  <p className="ed-price">
+                    {plan.price}
+                    <span>
+                      {plan.name === "Gratis" ? "sin compromiso" : "COP / mes"}
+                    </span>
+                  </p>
+                  <p className="ed-quota">{plan.quota}</p>
+                  <ul>
+                    {plan.features.map((feature) => (
+                      <li key={feature}>
+                        <Check size={17} aria-hidden="true" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+            <p className="ed-pricing-note">
+              Información consultada el 6 de octubre de 2026. Los planes
+              incluyen historial y citas normativas en el producto completo.
+              Esta demostración no activa planes ni procesa pagos.
+            </p>
+            <div className="ed-pricing-action">
+              <span>Primero, conoce la conversación.</span>
+              <Link className="ed-button" to="/">
+                Probar la demostración{" "}
+                <ArrowRight size={19} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </section>
+        <section className="ed-section ed-wrap ed-faq" id="preguntas">
           <div>
-            <p className="eyebrow">ASÍ DE SENCILLO</p>
+            <p className="ed-kicker">03 — ANTES DE EMPEZAR</p>
             <h2>
-              Tu próxima respuesta
+              También hay
               <br />
-              empieza con una pregunta.
+              buenas preguntas
+              <br />
+              <em>por aquí.</em>
             </h2>
           </div>
-          <ol>
-            {[
-              "Abre el asistente y escribe tu duda.",
-              "Añade contexto para orientar la conversación.",
-              "Revisa la orientación con un profesional.",
-            ].map((text, index) => (
-              <li key={text}>
-                <span>{index + 1}</span>
-                {text}
-              </li>
+          <div className="ed-faq-list">
+            {questions.map((question) => (
+              <details key={question.title}>
+                <summary>
+                  {question.title}
+                  <Plus size={20} aria-hidden="true" />
+                </summary>
+                <p>{question.text}</p>
+              </details>
             ))}
-          </ol>
-        </section>
-        <ProductDetails />
-        <section className="cta container">
-          <div>
-            <span className="eyebrow">TU IMPULSO TRIBUTARIO</span>
-            <h2>Hagamos más claras tus dudas.</h2>
-            <p>PiterAi te acompaña a dar el primer paso.</p>
           </div>
-          <Link to="/" className="button">
-            Conversar con PiterAi <ArrowRight size={19} />
-          </Link>
         </section>
-        <div className="container home-disclaimer">
-          <Disclaimer />
-        </div>
+        <section className="ed-closing ed-wrap">
+          <Sparkles size={32} aria-hidden="true" />
+          <h2>
+            Tu próxima claridad
+            <br />
+            empieza con una pregunta.
+          </h2>
+          <Link className="ed-button" to="/">
+            Conversar con PiterAi <ArrowRight size={20} aria-hidden="true" />
+          </Link>
+          <p>
+            Las respuestas son orientativas y no reemplazan a un contador o
+            asesor tributario.
+          </p>
+        </section>
+        <p className="ed-demo-notice ed-wrap">
+          <ShieldCheck size={18} aria-hidden="true" /> El chat de prueba utiliza
+          respuestas simuladas, no consulta fuentes en tiempo real y su
+          historial se reinicia al recargar.
+        </p>
       </main>
-      <footer className="footer container">
+      <footer className="ed-footer ed-wrap">
         <Logo />
-        <span>Hecho para conversar. Pensado para Colombia.</span>
+        <p>Hecho para entender. Pensado para Colombia.</p>
         <span>© {new Date().getFullYear()} PiterAi</span>
       </footer>
-    </>
+    </div>
   );
 }

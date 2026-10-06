@@ -88,6 +88,15 @@
   --selection-bg: var(--brand-teal);
   --selection-text: var(--brand-night);
   --theme-color: #0a1738;
+  --ed-bg: #122523;
+  --ed-card: #19312e;
+  --ed-panel: #203b35;
+  --ed-text: #f2f4e8;
+  --ed-muted: #b7c9c1;
+  --ed-border: #45625a;
+  --ed-accent: #c5e99b;
+  --ed-accent-hover: #aedc7d;
+  --ed-on-accent: #122523;
 }
 
 [data-theme="light"] {
@@ -137,6 +146,15 @@
   --home-header-bg: var(--white);
   --home-header-text: var(--brand-night);
   --theme-color: #f4f7fb;
+  --ed-bg: #f8f7f0;
+  --ed-card: #fffef9;
+  --ed-panel: #e9eedf;
+  --ed-text: #203b35;
+  --ed-muted: #50645b;
+  --ed-border: #b6c4b6;
+  --ed-accent: #315c40;
+  --ed-accent-hover: #254b33;
+  --ed-on-accent: #fffef9;
 }
 
 /* Contextos de lectura: reutilizan los mismos roles semánticos de componentes. */
