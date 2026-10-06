@@ -5,15 +5,16 @@ import {
   Layers3,
   ListChecks,
   ShieldCheck,
-  ArrowUpRight,
+  ArrowRight,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { isMock } from "../services/chat";
 
 const capabilities = [
   {
     icon: BookOpen,
     title: "Citas para revisar",
-    text: "La propuesta incluye el artículo aplicable y su vigencia para que puedas contrastar la orientación.",
+    text: "Una orientación tributaria debe acompañarse del artículo aplicable y su vigencia para que puedas revisar el respaldo de cada respuesta.",
   },
   {
     icon: Layers3,
@@ -28,17 +29,17 @@ const capabilities = [
   {
     icon: Clock3,
     title: "Consultas a tu ritmo",
-    text: "La plataforma de referencia presenta un asistente disponible las 24 horas, todos los días.",
+    text: "Un asistente digital para plantear tus dudas cuando lo necesites, sin depender de un horario de atención.",
   },
   {
     icon: History,
     title: "Retoma tus consultas",
-    text: "La plataforma ofrece historial para volver a conversaciones de sesiones anteriores.",
+    text: "Mantén el contexto de tu conversación y vuelve a los mensajes anteriores para entender mejor cada paso.",
   },
   {
     icon: ShieldCheck,
     title: "Claridad sobre los límites",
-    text: "Si las fuentes no ofrecen suficiente respaldo, la propuesta es comunicar esa incertidumbre.",
+    text: "Cuando las fuentes no ofrecen suficiente respaldo, es importante señalar la incertidumbre y revisar el caso con un profesional.",
   },
 ];
 
@@ -58,8 +59,8 @@ export default function ProductDetails() {
           </h2>
         </div>
         <p>
-          Estas capacidades se describen en la plataforma de referencia de
-          PiterAi.
+          Conoce los temas que puedes explorar y cómo revisar una orientación
+          tributaria antes de tomar decisiones.
         </p>
       </div>
       <div className="product-details-grid">
@@ -75,40 +76,17 @@ export default function ProductDetails() {
       </div>
       <div className="product-reference">
         <div>
-          <h3>Explora la plataforma y sus planes</h3>
-          <p>Consulta las opciones de acceso en el sitio de referencia.</p>
+          <h3>Empieza con una duda de tu día a día</h3>
+          <p>
+            ¿Qué diferencia hay entre declarar y pagar renta? ¿Cómo funciona una
+            retención? ¿Qué es el Régimen Simple? Plantea tu pregunta y añade el
+            contexto de tu situación para continuar la conversación.
+          </p>
         </div>
-        <div className="product-reference-links">
-          <a
-            href="https://tributaria.agenti.com.co/planes"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver planes <ArrowUpRight size={17} />
-            <span className="sr-only"> (abre una pestaña nueva)</span>
-          </a>
-          <a
-            href="https://tributaria.agenti.com.co"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visitar plataforma <ArrowUpRight size={17} />
-            <span className="sr-only"> (abre una pestaña nueva)</span>
-          </a>
-        </div>
+        <Link className="button small" to="/">
+          Preguntar a PiterAi <ArrowRight size={17} aria-hidden="true" />
+        </Link>
       </div>
-      <p className="product-source">
-        Fuente:{" "}
-        <a
-          href="https://tributaria.agenti.com.co"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          tributaria.agenti.com.co
-          <span className="sr-only"> (abre una pestaña nueva)</span>
-        </a>
-        .
-      </p>
       {isMock && (
         <p className="product-demo-note">
           <ShieldCheck size={17} aria-hidden="true" />
