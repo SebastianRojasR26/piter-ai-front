@@ -74,18 +74,14 @@
   --user-text: var(--white);
   --user-meta: #bbd0e9;
   --badge-bg: #f0f8f5;
-  --badge-border: #d2e6e0;
   --badge-text: var(--brand-petroleum);
   --danger: var(--brand-indigo);
   --danger-bg: #f0f0f7;
   --danger-border: #9799b5;
   --disabled-bg: #e0e7ee;
   --disabled-text: #65758b;
-  --chrome-bg: var(--brand-night);
-  --chrome-text: var(--white);
-  --chrome-border: #ffffff14;
-  --chrome-surface: var(--brand-navy);
-  --chrome-surface-2: #ffffff08;
+  --home-header-bg: var(--brand-night);
+  --home-header-text: var(--white);
   --scrollbar: #7c8da4;
   --scrollbar-track: var(--chat-bg);
   --selection-bg: var(--brand-teal);
@@ -125,11 +121,8 @@
   --chat-bg: #f4f7fb;
   --chat-muted: #52647d;
   --chat-subtle: #596b82;
-  --chrome-bg: var(--white);
-  --chrome-text: var(--brand-night);
-  --chrome-border: var(--border);
-  --chrome-surface: var(--white);
-  --chrome-surface-2: #edf2f8;
+  --home-header-bg: var(--white);
+  --home-header-text: var(--brand-night);
   --theme-color: #f4f7fb;
 }
 
@@ -145,11 +138,4 @@
   --border: var(--chat-border);
   --border-strong: var(--input-border);
   --focus: var(--chat-focus);
-}
-.chat-header {
-  --surface: var(--chrome-surface);
-  --surface-2: var(--chrome-surface-2);
-  --text: var(--chrome-text);
-  --border: var(--chrome-border);
-  --focus: var(--accent-text);
 }

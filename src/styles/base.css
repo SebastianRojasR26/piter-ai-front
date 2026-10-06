@@ -104,8 +104,8 @@ summary:focus-visible {
   display: block;
 }
 .header {
-  color: var(--chrome-text);
-  background: var(--chrome-bg);
+  color: var(--home-header-text);
+  background: var(--home-header-bg);
   border-bottom: 1px solid var(--overlay);
 }
 .header-inner {

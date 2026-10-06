@@ -8,9 +8,6 @@
   .suggestions {
     margin-top: 38px;
   }
-  .chat-header {
-    height: 83px;
-  }
   .composer-area {
     padding-bottom: max(25px, env(safe-area-inset-bottom));
   }
@@ -43,6 +40,10 @@
   }
   .sidebar {
     width: 225px;
+    padding-inline: 17px;
+  }
+  .sidebar-brand {
+    margin-inline: -17px;
     padding-inline: 17px;
   }
   .welcome {
@@ -367,6 +368,20 @@
   }
   .chat-header .colombia {
     display: none;
+  }
+  .chat-header .chat-title {
+    display: none;
+  }
+  .chat-mobile-logo {
+    display: block;
+  }
+  .sidebar-brand {
+    margin-inline: -22px;
+    padding-inline: 22px;
+    height: auto;
+    min-height: 52px;
+    padding-bottom: 18px;
+    margin-bottom: 24px;
   }
 }
 @media (max-width: 760px) {

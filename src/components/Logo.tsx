@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
-export default function Logo({ onClick }: { onClick?: () => void }) {
+export default function Logo({
+  onClick,
+  tone,
+}: {
+  onClick?: () => void;
+  tone?: "on-dark" | "on-light";
+}) {
   const { theme } = useTheme();
   return (
     <Link
@@ -11,7 +17,7 @@ export default function Logo({ onClick }: { onClick?: () => void }) {
     >
       <img
         src={
-          theme === "dark"
+          (tone ? tone === "on-dark" : theme === "dark")
             ? "/brand/logo-horizontal-white.png"
             : "/brand/logo-horizontal.png"
         }
