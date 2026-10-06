@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import Logo from "../components/Logo";
 import ThemeToggle from "../components/ThemeToggle";
+import FaqItem from "../components/FaqItem";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import "../styles/editorial.css";
 const benefits = [
   {
@@ -93,11 +95,13 @@ const questions = [
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  const page = useRef<HTMLDivElement>(null);
+  useScrollReveal(page);
   useEffect(() => {
     document.title = "PiterAi · Claridad para tus impuestos";
   }, []);
   return (
-    <div className="editorial">
+    <div className="editorial" ref={page}>
       <header
         className="ed-header"
         onKeyDown={(event) => {
@@ -343,13 +347,11 @@ export default function Home() {
           </div>
           <div className="ed-faq-list">
             {questions.map((question) => (
-              <details key={question.title}>
-                <summary>
-                  {question.title}
-                  <Plus size={20} aria-hidden="true" />
-                </summary>
-                <p>{question.text}</p>
-              </details>
+              <FaqItem
+                key={question.title}
+                title={question.title}
+                text={question.text}
+              />
             ))}
           </div>
         </section>
