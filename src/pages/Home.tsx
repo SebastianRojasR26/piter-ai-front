@@ -12,6 +12,7 @@ import {
 import Header from "../components/Header";
 import Logo from "../components/Logo";
 import Disclaimer from "../components/Disclaimer";
+import ProductDetails from "../components/ProductDetails";
 export default function Home() {
   useEffect(() => {
     document.title = "Funciones · PiterAi";
@@ -184,6 +185,7 @@ export default function Home() {
             ))}
           </ol>
         </section>
+        <ProductDetails />
         <section className="cta container">
           <div>
             <span className="eyebrow">TU IMPULSO TRIBUTARIO</span>
