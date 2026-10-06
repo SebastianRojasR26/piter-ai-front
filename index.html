@@ -5,6 +5,25 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0A1738" />
+    <script>
+      (() => {
+        let saved;
+        try {
+          saved = localStorage.getItem("piterai-theme");
+        } catch {}
+        const theme =
+          saved === "light" || saved === "dark"
+            ? saved
+            : typeof matchMedia === "function" &&
+                matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === "light" ? "#F4F7FB" : "#0A1738";
+      })();
+    </script>
     <meta
       name="description"
       content="PiterAi, tu impulso tributario. Entiende tus dudas tributarias en Colombia con un asistente cercano y claro."
