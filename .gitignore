@@ -6,6 +6,7 @@ dist/
 tmp/
 playwright-report/
 test-results/
+*.tsbuildinfo
 brand/BrandboardPITER.pdf
 brand/svg/
 brand/web/

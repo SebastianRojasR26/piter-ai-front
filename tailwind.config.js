@@ -1,1 +1,19 @@
-export default { content: ['./index.html', './src/**/*.{ts,tsx}'], theme: { extend: { colors: { teal: '#009984', petroleum: '#186868', navy: '#143057', night: '#0A1738', indigo: '#26295A' }, fontFamily: { display: ['var(--font-display)', 'sans-serif'], body: ['var(--font-body)', 'sans-serif'] } } }, plugins: [] };
+export default {
+  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        teal: "#009984",
+        petroleum: "#186868",
+        navy: "#143057",
+        night: "#0A1738",
+        indigo: "#26295A",
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
+      },
+    },
+  },
+  plugins: [],
+};
