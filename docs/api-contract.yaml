@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: API de PiterAi
+  version: 1.0.0
+  description: Contrato requerido por el frontend. El backend conserva el contexto usando conversation_id.
+servers:
+  - url: http://localhost:8000
+security:
+  - {}
+  - bearerAuth: []
+paths:
+  /chat:
+    post:
+      operationId: sendChatMessage
+      summary: Enviar una pregunta tributaria
+      description: Respuesta JSON completa, sin streaming. Autenticación opcional según configuración del servidor.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatRequest"
+            example:
+              message: ¿Qué es el RUT?
+              conversation_id: null
+      responses:
+        "200":
+          description: Respuesta del asistente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  /health:
+    get:
+      operationId: getHealth
+      summary: Comprobación opcional de disponibilidad
+      security: []
+      responses:
+        "200":
+          description: Servicio disponible
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+        "503":
+          $ref: "#/components/responses/Unavailable"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    ChatRequest:
+      type: object
+      required: [message, conversation_id]
+      additionalProperties: false
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 4000
+        conversation_id:
+          type: string
+          nullable: true
+          minLength: 1
+          description: null inicia una conversación; los turnos siguientes usan el ID devuelto.
+    ChatResponse:
+      type: object
+      required: [reply, conversation_id]
+      properties:
+        reply:
+          type: string
+          minLength: 1
+        conversation_id:
+          type: string
+          minLength: 1
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          example: SERVICE_UNAVAILABLE
+        message:
+          type: string
+          example: Servicio temporalmente no disponible
+  responses:
+    BadRequest:
+      description: Pregunta inválida
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: Token ausente, inválido o vencido
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    TooManyRequests:
+      description: Límite de solicitudes excedido
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Segundos sugeridos de espera
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    ServerError:
+      description: Error interno
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unavailable:
+      description: Servicio no disponible
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
