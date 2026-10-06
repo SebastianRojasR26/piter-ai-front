@@ -29,4 +29,4 @@
 
 ## Tema
 
-Claro y oscuro comparten todas las pantallas y estados. El header de chat mantiene Funciones y el toggle visibles en móvil, con el badge en una segunda fila para evitar overflow. El menú móvil permite Escape, ciclo de foco y regreso al botón de apertura. Tokens y contrastes: [design-tokens.md](design-tokens.md).
+Claro y oscuro comparten todas las pantallas y estados. El header usa la superficie clara de lectura en ambos temas. En escritorio mide 76 px, alineado con la marca lateral, y muestra «Asistente tributario» + chip Colombia; el único logo está en la barra lateral. Hasta 900 px el header muestra el logo oscuro para fondo claro. Funciones y el toggle siguen visibles, con el badge en una segunda fila en móvil para evitar overflow. Capturas de vacío, respuesta y error en `tmp/header/` a 375/768/1280 px, ambos temas. El menú móvil permite Escape, ciclo de foco y regreso al botón de apertura. Tokens y contrastes: [design-tokens.md](design-tokens.md).

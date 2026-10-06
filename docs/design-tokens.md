@@ -14,7 +14,7 @@ Los colores se definen únicamente en `src/styles/tokens.css`: `:root` contiene 
 | `--on-accent`, `--on-strong`                           | Texto en fondos teal y petróleo               |
 | `--focus`, `--focus-ring`                              | Foco visible y halo                           |
 | `--chat-*`, `--user-*`, `--icon-*`                     | Lectura, burbuja del usuario e isotipo        |
-| `--chrome-*`, `--badge-*`                              | Header, controles y modo de conexión          |
+| `--home-header-*`, `--badge-*`                         | Header, controles y modo de conexión          |
 | `--danger`, `--danger-bg`, `--danger-border`           | Error con índigo de marca y neutros derivados |
 | `--disabled-*`                                         | Controles deshabilitados                      |
 | `--gradient-*`, `--overlay*`, `--pattern-opacity`      | Degradados y textura                          |
@@ -22,7 +22,9 @@ Los colores se definen únicamente en `src/styles/tokens.css`: `:root` contiene 
 | `--scrollbar*`, `--selection-*`                        | Scrollbar y selección de texto                |
 | `--theme-color`                                        | Interfaz del navegador                        |
 
-El tema oscuro conserva la composición original: Home y menú en azul noche/navy, con área de lectura del chat y ejemplo claros. `.chat-main` y `.preview-card` reasignan los roles compartidos a `--chat-*`; el header usa `--chrome-*` para acompañar el logo del tema. El tema claro usa fondo #F4F7FB, superficies blancas, texto azul noche y secundarios derivados del navy. Los enlaces sobre fondos claros usan petróleo. `icon-light.png` se apoya siempre en una superficie clara. El patrón tiene opacidad 0,055 en oscuro y 0,025 en claro.
+Home y menú mantienen la paleta azul noche/navy en oscuro. El header del chat pertenece al área de lectura clara en ambos temas: fondo `--chat-bg`, texto `--chat-text`/`--chat-muted`, borde inferior `--chat-border`. Hereda los roles de `.chat-main` sin overrides de chrome. Los tokens `--chrome-*` se eliminaron; `--home-header-bg` y `--home-header-text` se usan únicamente para el header de Home. El tema claro usa fondo #F4F7FB, superficies blancas, texto azul noche y secundarios derivados del navy. Los enlaces sobre fondos claros usan petróleo. `icon-light.png` se apoya siempre en una superficie clara. El patrón tiene opacidad 0,055 en oscuro y 0,025 en claro.
+
+El header de escritorio no muestra logo: usa el título Fredoka «Asistente tributario» y el chip Colombia. Hasta 900 px muestra `Logo tone="on-light"`, siempre `logo-horizontal.png`. Los otros contextos conservan la elección por tema si no especifican tono. El bloque de marca lateral y el header miden 76 px en escritorio y sus separadores se alinean. ThemeToggle y el badge usan `--input-border`; el hover del toggle refuerza el borde con `--chat-focus` sobre `--icon-bg`. Se eliminó también `--badge-border`, que quedó sin uso.
 
 ## Contrastes
 
@@ -53,6 +55,8 @@ Calculados con luminancia relativa sRGB: `(L mayor + 0,05) / (L menor + 0,05)`. 
 
 Blanco sobre #009984 obtiene 3,57:1 y se evita para texto normal. El envío usa también azul noche sobre teal. El error usa índigo de marca y se identifica mediante título, texto y acciones, sin depender del color.
 
+El enlace Funciones y los iconos del header usan azul noche sobre #F7F9FC/#F4F7FB (más de 16:1). El borde del toggle tiene 3,21:1 en oscuro y 3,15:1 en claro; en hover cambia a petróleo sobre el fondo suave del isotipo (más de 5:1). El badge usa petróleo sobre #F0F8F5 (más de 6:1) y borde #7C8DA4 (3,14:1). El foco usa petróleo y conserva más de 6:1 sobre el fondo del header. Colombia usa los roles secundarios de lectura sobre blanco.
+
 ## Tema y accesibilidad
 
 - `useTheme` comparte el estado y lee/escribe `piterai-theme` con try/catch. Con almacenamiento bloqueado mantiene la selección en memoria.
@@ -65,3 +69,5 @@ Blanco sobre #009984 obtiene 3,57:1 y se evita para texto normal. El envío usa 
 ## Revisión
 
 Capturas en `tmp/themes/` (ignoradas): `/` y `/inicio`, claro/oscuro, 375, 768 y 1280 px. Chat vacío, cargando, con respuesta y error. También se comprueban reintento sin duplicados, cancelación durante escritura, Funciones, toggle del menú, persistencia y redirección, sin overflow horizontal o superposición del composer. Se corrigieron los títulos de sugerencias y el select en claro tras la primera ronda.
+
+Revisión posterior del header: 18 capturas en `tmp/header/`, ambos temas y 375/768/1280 px, estados vacío, respuesta y error. Se verifica un solo logo visible en escritorio, tono correcto en móvil/tablet, alineación a 76 px, foco y contraste de texto/bordes/iconos.
