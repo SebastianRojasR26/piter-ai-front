@@ -1,7 +1,7 @@
 # Pantallas y estados
 
 - `/`: landing del chat, con marca, enlace a Funciones, tema, badge de modo, menú lateral, sugerencias, composer abajo y aviso profesional visible.
-- `/inicio`: Home rediseñada con estética editorial, crema/verde bosque en claro y verde profundo en oscuro. Incluye hero, conversación ilustrativa, beneficios, pasos, cuatro planes con precios y límites publicados, FAQ desplegable y CTAs hacia `/`. Navegación por anclas y menú móvil. No hay enlaces externos, pagos ni activación de planes; se explican los límites del chat de prueba.
+- `/inicio`: Home rediseñada con estética editorial y la paleta del brandboard (teal, petróleo y azules), con superficies claras derivadas en modo claro. Incluye hero, conversación ilustrativa, beneficios, pasos, cuatro planes con precios y límites publicados, FAQ desplegable y CTAs hacia `/`. Navegación por anclas y menú móvil. No hay enlaces externos, pagos ni activación de planes; se explican los límites del chat de prueba.
 - `/chat`: redirección a `/` mediante `Navigate replace`, sin crear otra entrada de historial.
 - Otras rutas: página de ruta no encontrada con acceso al asistente.
 

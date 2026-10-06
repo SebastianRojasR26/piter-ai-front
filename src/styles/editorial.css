@@ -117,7 +117,7 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 100px;
-  background: var(--ed-accent);
+  background: var(--ed-button-bg);
   color: var(--ed-on-accent);
   padding: 16px 23px;
   min-height: 52px;
@@ -129,6 +129,7 @@
 .ed-button:hover {
   transform: translateY(-3px);
   background: var(--ed-accent-hover);
+  color: var(--ed-on-hover);
 }
 .ed-button:active {
   transform: translateY(0);
@@ -408,7 +409,7 @@
   font-weight: 600;
   border-radius: 100px;
   padding: 5px 8px;
-  background: var(--ed-accent);
+  background: var(--ed-button-bg);
   color: var(--ed-on-accent);
 }
 .ed-plan-description {

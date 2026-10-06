@@ -75,8 +75,8 @@ Revisión posterior del header: 18 capturas en `tmp/header/`, ambos temas y 375/
 
 ## Home editorial
 
-El rediseño de `/inicio` usa roles propios `--ed-bg`, `--ed-card`, `--ed-panel`, `--ed-text`, `--ed-muted`, `--ed-border`, `--ed-accent`, `--ed-accent-hover` y `--ed-on-accent`. Todos los colores permanecen centralizados en `tokens.css`.
+El rediseño de `/inicio` usa roles propios `--ed-bg`, `--ed-card`, `--ed-panel`, `--ed-text`, `--ed-muted`, `--ed-border`, `--ed-accent`, `--ed-button-bg`, `--ed-accent-hover`, `--ed-on-accent` y `--ed-on-hover`. Son aliases de la paleta compartida; todos los colores permanecen centralizados en `tokens.css`.
 
-En claro: crema #F8F7F0, tarjetas #FFFEF9, paneles #E9EEDF y verde bosque #315C40. En oscuro: base #122523, tarjetas #19312E, paneles #203B35 y acento #C5E99B. Los textos secundarios usan #50645B / #B7C9C1. Navegación, iconos y foco heredan estos roles dentro de la Home; el chat conserva sus tokens de lectura.
+La paleta se verificó visualmente en `BRANDBOARD PITER/BrandboardPITER.pdf`, dentro del ZIP proporcionado: teal #009984, petróleo #186868, navy #143057, azul noche #0A1738 e índigo #26295A. Se retiraron crema y verde bosque. En claro se usan blanco y grises azulados derivados; en oscuro azul noche, navy y superficies de lectura derivadas. Botones y badge usan teal con texto azul noche; hover petróleo con texto blanco. El acento de texto oscuro es el tono accesible #57D2B6 derivado del teal. Navegación, iconos y foco heredan estos roles dentro de la Home; el chat conserva sus tokens de lectura.
 
 Entradas breves de hero y ejemplo, hover de planes y botones, FAQ nativa accesible con teclado. Se respeta movimiento reducido. Capturas de revisión en `tmp/redesign-{tema}-{ancho}.png`, 375/768/1280 px, y vistas de planes en `tmp/plans-*`.
