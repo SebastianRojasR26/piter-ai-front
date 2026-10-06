@@ -72,3 +72,11 @@ Revisión posterior del header: 18 capturas en `tmp/header/`, ambos temas y 375/
 ## Movimiento
 
 `src/styles/motion.css` define entradas breves de mensajes, errores y bienvenida, aparición escalonada de tarjetas, deslizamiento del menú y microinteracciones en botones/iconos. Los colores de superficies, bordes y textos transicionan al cambiar de tema. Las animaciones no bloquean el envío ni reinician respuestas. Se usa fill-mode backwards para permitir hover después de las entradas. Con prefers-reduced-motion se desactivan animaciones, transiciones y desplazamientos decorativos.
+
+## Home editorial
+
+El rediseño de `/inicio` usa roles propios `--ed-bg`, `--ed-card`, `--ed-panel`, `--ed-text`, `--ed-muted`, `--ed-border`, `--ed-accent`, `--ed-accent-hover` y `--ed-on-accent`. Todos los colores permanecen centralizados en `tokens.css`.
+
+En claro: crema #F8F7F0, tarjetas #FFFEF9, paneles #E9EEDF y verde bosque #315C40. En oscuro: base #122523, tarjetas #19312E, paneles #203B35 y acento #C5E99B. Los textos secundarios usan #50645B / #B7C9C1. Navegación, iconos y foco heredan estos roles dentro de la Home; el chat conserva sus tokens de lectura.
+
+Entradas breves de hero y ejemplo, hover de planes y botones, FAQ nativa accesible con teclado. Se respeta movimiento reducido. Capturas de revisión en `tmp/redesign-{tema}-{ancho}.png`, 375/768/1280 px, y vistas de planes en `tmp/plans-*`.
