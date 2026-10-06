@@ -23,7 +23,7 @@ export default function ChatHeader({
           <Menu size={21} />
         </button>
         <div className="chat-mobile-logo">
-          <Logo tone="on-light" />
+          <Logo />
         </div>
         <span className="chat-title">Asistente tributario</span>
         <span className="colombia">Colombia</span>

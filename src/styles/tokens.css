@@ -55,31 +55,32 @@
   --active-border: #00998440;
   --active-text: #d1fff3;
 
-  /* El área de lectura clara del chat y el ejemplo conserva el diseño original en oscuro. */
-  --chat-bg: #f7f9fc;
-  --chat-surface: var(--white);
-  --chat-text: var(--brand-night);
-  --chat-heading: var(--brand-navy);
-  --chat-muted: #617087;
-  --chat-subtle: #64738a;
-  --chat-border: #e0e6ef;
+  /* Superficies de lectura que acompañan el tema completo. */
+  --chat-bg: #101f3c;
+  --chat-surface: #182c4a;
+  --chat-text: #f4f7fb;
+  --chat-heading: #f4f7fb;
+  --chat-muted: #c4d0e2;
+  --chat-subtle: #aebed5;
+  --chat-border: #304560;
   --input-border: #7c8da4;
-  --chat-focus: var(--brand-petroleum);
+  --chat-focus: #57d2b6;
+  --chat-accent-text: #57d2b6;
   --chat-gradient:
-    radial-gradient(ellipse at 50% 30%, var(--white), var(--clear) 70%),
+    radial-gradient(ellipse at 50% 30%, var(--chat-surface), var(--clear) 70%),
     var(--chat-bg);
   --icon-bg: #e7f3f0;
   --icon-surface: var(--white);
   --user-bg: var(--brand-navy);
   --user-text: var(--white);
   --user-meta: #bbd0e9;
-  --badge-bg: #f0f8f5;
-  --badge-text: var(--brand-petroleum);
-  --danger: var(--brand-indigo);
-  --danger-bg: #f0f0f7;
+  --badge-bg: #173d42;
+  --badge-text: #a1e8d6;
+  --danger: #e3e5fa;
+  --danger-bg: var(--brand-indigo);
   --danger-border: #9799b5;
-  --disabled-bg: #e0e7ee;
-  --disabled-text: #65758b;
+  --disabled-bg: #304560;
+  --disabled-text: #aebed5;
   --home-header-bg: var(--brand-night);
   --home-header-text: var(--white);
   --scrollbar: #7c8da4;
@@ -119,6 +120,18 @@
   --active-border: #00998440;
   --active-text: var(--brand-petroleum);
   --chat-bg: #f4f7fb;
+  --chat-surface: var(--white);
+  --chat-text: var(--brand-night);
+  --chat-heading: var(--brand-navy);
+  --chat-border: #e0e6ef;
+  --chat-focus: var(--brand-petroleum);
+  --chat-accent-text: var(--brand-petroleum);
+  --badge-bg: #f0f8f5;
+  --badge-text: var(--brand-petroleum);
+  --danger: var(--brand-indigo);
+  --danger-bg: #f0f0f7;
+  --disabled-bg: #e0e7ee;
+  --disabled-text: #65758b;
   --chat-muted: #52647d;
   --chat-subtle: #596b82;
   --home-header-bg: var(--white);

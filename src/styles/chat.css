@@ -201,7 +201,7 @@
   transform: scale(0.96);
 }
 .mock-controls select {
-  color-scheme: light;
+  color-scheme: inherit;
 }
 .mock-controls summary {
   min-height: 28px;
