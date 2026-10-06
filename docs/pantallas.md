@@ -1,7 +1,7 @@
 # Pantallas y estados
 
 - `/`: landing del chat, con marca, enlace a Funciones, tema, badge de modo, menú lateral, sugerencias, composer abajo y aviso profesional visible.
-- `/inicio`: Home con presentación, ejemplo de conversación, funciones, pasos y CTA hacia `/`.
+- `/inicio`: Home con presentación, ejemplo de conversación, funciones, pasos y CTA hacia `/`. Añade capacidades publicadas en tributaria.agenti.com.co, enlaces externos a plataforma/planes y aviso de los límites del mock.
 - `/chat`: redirección a `/` mediante `Navigate replace`, sin crear otra entrada de historial.
 - Otras rutas: página de ruta no encontrada con acceso al asistente.
 
