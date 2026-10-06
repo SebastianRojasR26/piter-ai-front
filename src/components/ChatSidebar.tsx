@@ -24,17 +24,39 @@ export default function ChatSidebar({
   useEffect(() => {
     if (!open) return;
     const previous = document.activeElement as HTMLElement | null;
-    const focusable = () => Array.from(panel.current?.querySelectorAll<HTMLElement>('a, button, select, [tabindex="0"]') ?? []).filter(element => element.getClientRects().length > 0);
+    const focusable = () =>
+      Array.from(
+        panel.current?.querySelectorAll<HTMLElement>(
+          'a, button, select, [tabindex="0"]',
+        ) ?? [],
+      ).filter((element) => element.getClientRects().length > 0);
     focusable()[0]?.focus();
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { event.preventDefault(); onClose(); }
-      if (event.key !== 'Tab' || !window.matchMedia('(max-width: 900px)').matches) return;
-      const items = focusable(); const first = items[0]; const last = items.at(-1);
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+      }
+      if (
+        event.key !== "Tab" ||
+        !window.matchMedia("(max-width: 900px)").matches
+      )
+        return;
+      const items = focusable();
+      const first = items[0];
+      const last = items.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
     };
-    document.addEventListener('keydown', onKey);
-    return () => { document.removeEventListener('keydown', onKey); previous?.focus(); };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      previous?.focus();
+    };
   }, [open, onClose]);
   return (
     <>
@@ -43,7 +65,7 @@ export default function ChatSidebar({
         id="chat-sidebar"
         className={open ? "sidebar visible" : "sidebar"}
         aria-label="Menú del asistente"
-        role={open ? 'dialog' : undefined}
+        role={open ? "dialog" : undefined}
         aria-modal={open ? true : undefined}
       >
         <div className="sidebar-brand">

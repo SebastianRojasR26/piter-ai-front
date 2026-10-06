@@ -3,11 +3,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        teal: "#009984",
-        petroleum: "#186868",
-        navy: "#143057",
-        night: "#0A1738",
-        indigo: "#26295A",
+        teal: "var(--brand-teal)",
+        petroleum: "var(--brand-petroleum)",
+        navy: "var(--brand-navy)",
+        night: "var(--brand-night)",
+        indigo: "var(--brand-indigo)",
+        bg: "var(--bg)",
+        surface: "var(--surface)",
+        "surface-2": "var(--surface-2)",
+        text: "var(--text)",
+        "text-muted": "var(--text-muted)",
+        border: "var(--border)",
+        accent: "var(--accent)",
+        "accent-strong": "var(--accent-strong)",
+        "on-accent": "var(--on-accent)",
+        danger: "var(--danger)",
+        focus: "var(--focus)",
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
