@@ -1,6 +1,6 @@
 # PiterAi · Tu impulso Tributario
 
-Frontend en español de un asistente tributario para Colombia. Incluye Home (`/`) y chat (`/chat`), marca oficial, preguntas sugeridas, efecto de escritura, errores y reintentos. Las respuestas son orientativas y no reemplazan a un contador o asesor tributario.
+Frontend en español de un asistente tributario para Colombia. La landing es el chat (`/`) y la Home de funciones vive en `/inicio`. `/chat` redirige a `/` con `Navigate replace` para conservar enlaces anteriores. Incluye marca oficial, modo claro/oscuro, preguntas sugeridas, escritura progresiva, errores y reintentos. Las respuestas son orientativas y no reemplazan a un contador o asesor tributario.
 
 ## Requisitos e instalación
 
@@ -16,22 +16,27 @@ Abre la URL que muestra Vite. Sin `.env`, también funciona: el modo demostraci�
 
 ## Scripts
 
-| Comando             | Propósito                                               |
-| ------------------- | ------------------------------------------------------- |
-| `npm run dev`       | Servidor local Vite                                     |
-| `npm run build`     | Typecheck y producción en `dist/`                       |
-| `npm run preview`   | Previsualizar el build                                  |
-| `npm run typecheck` | Comprobación estricta de TypeScript                     |
-| `npm run lint`      | ESLint y reglas de hooks                                |
-| `npm test`          | Pruebas de integración del cliente HTTP, errores y mock |
+| Comando             | Propósito                           |
+| ------------------- | ----------------------------------- |
+| `npm run dev`       | Servidor local Vite                 |
+| `npm run build`     | Typecheck y producción en `dist/`   |
+| `npm run preview`   | Previsualizar el build              |
+| `npm run typecheck` | Comprobación estricta de TypeScript |
+| `npm run lint`      | ESLint y reglas de hooks            |
+| `npm test`          | Pruebas de servicios, tema y rutas  |
 
 ## Estructura
 
 ```text
 src/
-  App.tsx           Home, chat y navegación
+  App.tsx           Rutas y redirección de enlaces antiguos
   main.tsx          Entrada React
-  styles.css       Diseño responsive y accesibilidad
+  styles.css       Entrada de estilos y Tailwind
+  styles/          Tokens, base, Home, chat y responsive
+  pages/           Chat, Home y NotFound
+  components/      Headers, Logo, ThemeToggle, Sidebar, Composer y mensajes
+  hooks/useTheme.ts Tema compartido y persistente
+  types/chat.ts    Tipos de mensajes y estados
   services/        Único lugar para llamadas API
     http.ts        Fetch, token, timeout y cancelación
     chat.ts        Selección mock/API y validación de respuesta
@@ -43,6 +48,17 @@ docs/              Contrato OpenAPI y pantallas/estados
 ```
 
 Los originales en `brand/web/`, `brand/svg/` y el brandboard se conservan localmente, fuera de `src`, y no se incluyen en Git. Los recursos usados están en `public/`. El favicon PNG proviene de `icon-app.png`. Fredoka y Barlow son fuentes libres, servidas localmente mediante Fontsource, sin llamadas a Google Fonts. Las variables CSS `--font-display` y `--font-body` se referencian desde `tailwind.config.js`; no se incluyen KG Blank Space Solid ni Bahnschrift.
+
+## Rutas y tema
+
+- `/`: landing del asistente. Su header incluye marca, enlace **Funciones**, selector de tema y badge de modo, también en móvil.
+- `/inicio`: presentación de funciones, beneficios y pasos; todos los CTAs llevan al chat `/`.
+- `/chat`: redirección a `/` reemplazando la entrada de historial.
+- El logo siempre lleva a `/`; «Conoce PiterAi» en el menú lleva a `/inicio`.
+
+El botón Sol/Luna aparece en ambos headers y en el menú lateral móvil. Guarda la preferencia en `localStorage` (`piterai-theme`). Si no hay preferencia válida, sigue el tema del sistema; sin preferencia del sistema usa oscuro. Con almacenamiento bloqueado funciona en memoria. Se sincronizan cambios de sistema y de almacenamiento entre pestañas. Un script inicial evita el parpadeo; `data-theme`, `color-scheme`, el logo y `theme-color` acompañan la selección. Las transiciones respetan movimiento reducido.
+
+Los colores semánticos y la [tabla de contrastes](docs/design-tokens.md) se documentan aparte. El modo oscuro conserva la composición original y el área de lectura clara. El modo claro adapta Home, menú y controles a blanco azulado y texto navy. El composer respeta `dvh` y safe-area, y el menú móvil tiene cierre con Escape y ciclo de foco.
 
 ## Variables de entorno
 
@@ -99,4 +115,4 @@ git push -u origin develop
 gh pr create --base main --head develop --title "feat: frontend PiterAi" --body-file docs/pr-description.md
 ```
 
-Si el nombre ya existe en la cuenta, elige un nombre nuevo en `gh repo create`. No hacer merge; la revisión y aprobación corresponde a Sebas. Para alojamiento futuro, el servidor debe dirigir rutas SPA como `/chat` a `index.html`.
+Si el nombre ya existe en la cuenta, elige un nombre nuevo en `gh repo create`. No hacer merge; la revisión y aprobación corresponde a Sebas. Para alojamiento futuro, el servidor debe dirigir rutas SPA como `/inicio` y el alias `/chat` a `index.html`.

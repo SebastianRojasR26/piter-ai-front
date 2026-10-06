@@ -1,7 +1,8 @@
 # Pantallas y estados
 
-- `/`: Home con presentación, ejemplo ilustrativo de conversación, funciones, pasos y CTA al chat.
-- `/chat`: asistente con menú lateral, sugerencias, formulario fijo abajo y aviso profesional visible.
+- `/`: landing del chat, con marca, enlace a Funciones, tema, badge de modo, menú lateral, sugerencias, composer abajo y aviso profesional visible.
+- `/inicio`: Home con presentación, ejemplo de conversación, funciones, pasos y CTA hacia `/`.
+- `/chat`: redirección a `/` mediante `Navigate replace`, sin crear otra entrada de historial.
 - Otras rutas: página de ruta no encontrada con acceso al asistente.
 
 ## Estados del chat
@@ -17,9 +18,15 @@
 
 ## Verificación manual
 
-1. Abrir `/chat`, enviar con Enter y comprobar saltos de línea con Shift + Enter.
+1. Abrir `/`, enviar con Enter y comprobar saltos de línea con Shift + Enter.
 2. En «Controles de demostración», seleccionar cada error y enviar una pregunta.
 3. Seleccionar «Normal» y reintentar: debe aparecer una respuesta sin duplicar la pregunta.
 4. Pulsar «Nueva conversación» durante carga o escritura: la respuesta anterior no debe reaparecer.
-5. Verificar ambas rutas en 375 px, teclado, foco visible y preferencia de movimiento reducido.
+5. Verificar `/` y `/inicio` en 375, 768 y 1280 px, temas oscuro/claro, teclado, foco visible y movimiento reducido. Capturas en `tmp/themes/`.
 6. Con mock desactivado, comprobar un backend que respete el contrato y su configuración CORS.
+7. Comprobar `/chat` → `/`, logo → `/` y Funciones/Conoce PiterAi → `/inicio`.
+8. Cambiar tema desde ambos headers y menú móvil; recargar y comprobar persistencia, logo, meta theme-color, preferencia de sistema y funcionamiento con almacenamiento bloqueado.
+
+## Tema
+
+Claro y oscuro comparten todas las pantallas y estados. El header de chat mantiene Funciones y el toggle visibles en móvil, con el badge en una segunda fila para evitar overflow. El menú móvil permite Escape, ciclo de foco y regreso al botón de apertura. Tokens y contrastes: [design-tokens.md](design-tokens.md).
