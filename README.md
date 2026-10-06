@@ -58,7 +58,7 @@ Los originales en `brand/web/`, `brand/svg/` y el brandboard se conservan localm
 
 El botón Sol/Luna aparece en ambos headers y en el menú lateral móvil. Guarda la preferencia en `localStorage` (`piterai-theme`). Si no hay preferencia válida, sigue el tema del sistema; sin preferencia del sistema usa oscuro. Con almacenamiento bloqueado funciona en memoria. Se sincronizan cambios de sistema y de almacenamiento entre pestañas. Un script inicial evita el parpadeo; `data-theme`, `color-scheme`, el logo y `theme-color` acompañan la selección. Las transiciones respetan movimiento reducido.
 
-Los colores semánticos y la [tabla de contrastes](docs/design-tokens.md) se documentan aparte. El modo oscuro conserva la composición original y el área de lectura clara. El modo claro adapta Home, menú y controles a blanco azulado y texto navy. El composer respeta `dvh` y safe-area, y el menú móvil tiene cierre con Escape y ciclo de foco.
+Los colores semánticos y la [tabla de contrastes](docs/design-tokens.md) se documentan aparte. El modo oscuro se aplica a todo el chat: header, lectura, tarjetas, errores y composer. El modo claro adapta Home, menú y controles a blanco azulado y texto navy. Hay entradas y microinteracciones suaves, desactivadas con movimiento reducido. El composer respeta `dvh` y safe-area, y el menú móvil tiene cierre con Escape y ciclo de foco.
 
 ## Variables de entorno
 

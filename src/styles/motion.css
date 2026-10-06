@@ -1,0 +1,177 @@
+/* Movimiento breve, sin bloquear interacción ni alterar el historial. */
+:root {
+  --motion-fast: 180ms;
+  --motion-enter: 420ms;
+  --motion-ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.chat-main,
+.preview-card {
+  --accent-text: var(--chat-accent-text);
+}
+.welcome .eyebrow,
+.welcome h1 span,
+.loading,
+.suggestions > button > svg:first-child,
+.preview-status,
+.preview-answer > svg,
+.functions-link:hover {
+  color: var(--chat-accent-text);
+}
+.mode-badge {
+  color: var(--badge-text);
+}
+.chat-header .theme-toggle:hover,
+.chat-header .icon-button:hover {
+  background: var(--chat-surface);
+}
+.assistant-icon,
+.welcome-icon,
+.message-avatar {
+  background: var(--icon-bg);
+}
+.welcome-icon,
+.message-avatar {
+  border-color: var(--input-border);
+}
+.hero-copy,
+.hero-visual,
+.welcome,
+.message,
+.error-card,
+.loading {
+  animation: arrive var(--motion-enter) var(--motion-ease) backwards;
+}
+.hero-visual {
+  animation-delay: 80ms;
+}
+.feature-card,
+.suggestions > button {
+  animation: arrive var(--motion-enter) var(--motion-ease) backwards;
+}
+.feature-card:nth-child(2),
+.suggestions > button:nth-child(2) {
+  animation-delay: 55ms;
+}
+.feature-card:nth-child(3),
+.suggestions > button:nth-child(3) {
+  animation-delay: 110ms;
+}
+.suggestions > button:nth-child(4) {
+  animation-delay: 165ms;
+}
+button,
+.button,
+.functions-link,
+.feature-card,
+.suggestions > button,
+.preview-input,
+.navigation a {
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    background-color 240ms ease,
+    color 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+.button svg,
+.new-chat svg,
+.functions-link,
+.theme-toggle svg,
+.suggestions > button > svg:last-child {
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    color 240ms ease;
+}
+.theme-toggle svg {
+  animation: icon-arrive 250ms var(--motion-ease);
+}
+.theme-toggle:hover svg {
+  transform: rotate(12deg);
+}
+.button:hover svg,
+.suggestions > button:hover > svg:last-child {
+  transform: translateX(3px);
+}
+.new-chat:hover svg {
+  transform: rotate(90deg);
+}
+.composer:focus-within {
+  transform: translateY(-2px);
+}
+.composer {
+  transition:
+    background-color 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    transform var(--motion-fast) var(--motion-ease);
+}
+.sidebar.visible {
+  animation: slide-in 250ms var(--motion-ease);
+}
+.sidebar-overlay {
+  animation: fade-in 180ms ease;
+}
+@media (hover: hover) {
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-text);
+    box-shadow: var(--shadow-icon);
+  }
+  .new-chat:hover,
+  .theme-toggle:hover {
+    transform: translateY(-1px);
+  }
+}
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes icon-arrive {
+  from {
+    opacity: 0.3;
+    transform: rotate(-25deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes slide-in {
+  from {
+    opacity: 0.5;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .composer:focus-within,
+  .feature-card:hover,
+  .theme-toggle:hover,
+  .new-chat:hover {
+    transform: none;
+  }
+}

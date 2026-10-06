@@ -22,40 +22,37 @@ Los colores se definen únicamente en `src/styles/tokens.css`: `:root` contiene 
 | `--scrollbar*`, `--selection-*`                        | Scrollbar y selección de texto                |
 | `--theme-color`                                        | Interfaz del navegador                        |
 
-Home y menú mantienen la paleta azul noche/navy en oscuro. El header del chat pertenece al área de lectura clara en ambos temas: fondo `--chat-bg`, texto `--chat-text`/`--chat-muted`, borde inferior `--chat-border`. Hereda los roles de `.chat-main` sin overrides de chrome. Los tokens `--chrome-*` se eliminaron; `--home-header-bg` y `--home-header-text` se usan únicamente para el header de Home. El tema claro usa fondo #F4F7FB, superficies blancas, texto azul noche y secundarios derivados del navy. Los enlaces sobre fondos claros usan petróleo. `icon-light.png` se apoya siempre en una superficie clara. El patrón tiene opacidad 0,055 en oscuro y 0,025 en claro.
+Home y menú mantienen la paleta azul noche/navy en oscuro. El header del chat pertenece al área de lectura que acompaña el tema completo: fondo `--chat-bg`, texto `--chat-text`/`--chat-muted`, borde inferior `--chat-border`. Hereda los roles de `.chat-main` sin overrides de chrome. Los tokens `--chrome-*` se eliminaron; `--home-header-bg` y `--home-header-text` se usan únicamente para el header de Home. El tema claro usa fondo #F4F7FB, superficies blancas, texto azul noche y secundarios derivados del navy. Los enlaces sobre fondos claros usan petróleo. `icon-light.png` se apoya siempre en una superficie clara. El patrón tiene opacidad 0,055 en oscuro y 0,025 en claro.
 
-El header de escritorio no muestra logo: usa el título Fredoka «Asistente tributario» y el chip Colombia. Hasta 900 px muestra `Logo tone="on-light"`, siempre `logo-horizontal.png`. Los otros contextos conservan la elección por tema si no especifican tono. El bloque de marca lateral y el header miden 76 px en escritorio y sus separadores se alinean. ThemeToggle y el badge usan `--input-border`; el hover del toggle refuerza el borde con `--chat-focus` sobre `--icon-bg`. Se eliminó también `--badge-border`, que quedó sin uso.
+El header de escritorio no muestra logo: usa el título Fredoka «Asistente tributario» y el chip Colombia. Hasta 900 px muestra el logo por tema: blanco en oscuro y azul noche en claro. Los otros contextos conservan la elección por tema si no especifican tono. El bloque de marca lateral y el header miden 76 px en escritorio y sus separadores se alinean. ThemeToggle y el badge usan `--input-border`; el hover del toggle refuerza el borde con `--chat-focus` sobre `--chat-surface`. Se eliminó también `--badge-border`, que quedó sin uso.
 
 ## Contrastes
 
 Calculados con luminancia relativa sRGB: `(L mayor + 0,05) / (L menor + 0,05)`. Texto normal requiere 4,5:1; límites de inputs y foco, 3:1. En Home oscura se comprueba el extremo más claro del degradado (#143057); en superficies claras se comprueba el fondo más desfavorable usado por el rol. Los bordes decorativos de tarjetas/divisiones y controles deshabilitados no se usan como indicadores de foco.
 
-| Elemento / tema                             | Primer plano | Fondo   | Ratio   | Resultado       |
-| ------------------------------------------- | ------------ | ------- | ------- | --------------- |
-| CTA y selección / ambos                     | #0A1738      | #009984 | 4,94:1  | AA texto normal |
-| Hover CTA / ambos                           | #FFFFFF      | #186868 | 6,52:1  | AA texto normal |
-| Texto principal / claro                     | #0A1738      | #F4F7FB | 16,39:1 | AA              |
-| Enlaces y eyebrows / claro                  | #186868      | #EDF2F8 | 5,80:1  | AA              |
-| Secundario / claro                          | #52647D      | #F4F7FB | 5,62:1  | AA              |
-| Sutil / claro                               | #596B82      | #EDF2F8 | 4,85:1  | AA              |
-| Eyebrows / oscuro                           | #A6C6CE      | #143057 | 7,29:1  | AA              |
-| Secundario / oscuro                         | #B5C3D9      | #143057 | 7,40:1  | AA              |
-| Sutil / oscuro                              | #9BAECB      | #143057 | 5,86:1  | AA              |
-| Acento y foco / oscuro                      | #57D2B6      | #143057 | 7,11:1  | AA texto y foco |
-| Títulos de sugerencias / ambos              | #143057      | #FFFFFF | 13,21:1 | AA              |
-| Secundario chat / oscuro                    | #617087      | #F7F9FC | 4,77:1  | AA              |
-| Placeholder, contador y notas chat / oscuro | #64738A      | #F7F9FC | 4,57:1  | AA              |
-| Enlaces, carga y foco chat / ambos          | #186868      | #FFFFFF | 6,52:1  | AA texto y foco |
-| Burbuja usuario / ambos                     | #FFFFFF      | #143057 | 13,21:1 | AA              |
-| Autor de burbuja / ambos                    | #BBD0E9      | #143057 | 8,37:1  | AA              |
-| Error / ambos                               | #26295A      | #F0F0F7 | 11,96:1 | AA              |
-| Borde input/select / blanco                 | #7C8DA4      | #FFFFFF | 3,39:1  | Componentes     |
-| Borde input / chat oscuro                   | #7C8DA4      | #F7F9FC | 3,21:1  | Componentes     |
-| Borde input / chat claro                    | #7C8DA4      | #F4F7FB | 3,15:1  | Componentes     |
+| Elemento / tema              | Primer plano | Fondo   | Ratio   | Criterio |
+| ---------------------------- | ------------ | ------- | ------- | -------- |
+| CTA / ambos                  | #0A1738      | #009984 | 4,94:1  | ≥4,5:1   |
+| Hover CTA / ambos            | #FFFFFF      | #186868 | 6,52:1  | ≥4,5:1   |
+| Texto chat / oscuro          | #F4F7FB      | #182C4A | 13,05:1 | ≥4,5:1   |
+| Secundario chat / oscuro     | #C4D0E2      | #182C4A | 8,99:1  | ≥4,5:1   |
+| Placeholder y notas / oscuro | #AEBED5      | #182C4A | 7,43:1  | ≥4,5:1   |
+| Acentos y foco / oscuro      | #57D2B6      | #182C4A | 7,54:1  | ≥4,5:1   |
+| Texto chat / claro           | #0A1738      | #F4F7FB | 16,39:1 | ≥4,5:1   |
+| Secundario chat / claro      | #52647D      | #F4F7FB | 5,62:1  | ≥4,5:1   |
+| Acentos y foco / claro       | #186868      | #FFFFFF | 6,52:1  | ≥4,5:1   |
+| Badge / oscuro               | #A1E8D6      | #173D42 | 8,43:1  | ≥4,5:1   |
+| Badge / claro                | #186868      | #F0F8F5 | 6,04:1  | ≥4,5:1   |
+| Error / oscuro               | #E3E5FA      | #26295A | 10,89:1 | ≥4,5:1   |
+| Error / claro                | #26295A      | #F0F0F7 | 11,96:1 | ≥4,5:1   |
+| Borde input / oscuro         | #7C8DA4      | #182C4A | 4,14:1  | ≥3:1     |
+| Borde input / claro          | #7C8DA4      | #F4F7FB | 3,15:1  | ≥3:1     |
+| Borde badge / oscuro         | #7C8DA4      | #173D42 | 3,48:1  | ≥3:1     |
+| Borde badge / claro          | #7C8DA4      | #F0F8F5 | 3,14:1  | ≥3:1     |
 
 Blanco sobre #009984 obtiene 3,57:1 y se evita para texto normal. El envío usa también azul noche sobre teal. El error usa índigo de marca y se identifica mediante título, texto y acciones, sin depender del color.
 
-El enlace Funciones y los iconos del header usan azul noche sobre #F7F9FC/#F4F7FB (más de 16:1). El borde del toggle tiene 3,21:1 en oscuro y 3,15:1 en claro; en hover cambia a petróleo sobre el fondo suave del isotipo (más de 5:1). El badge usa petróleo sobre #F0F8F5 (más de 6:1) y borde #7C8DA4 (3,14:1). El foco usa petróleo y conserva más de 6:1 sobre el fondo del header. Colombia usa los roles secundarios de lectura sobre blanco.
+El enlace Funciones, el título y los iconos heredan el texto de lectura en cada tema. ThemeToggle y badge conservan bordes e iconos con ratio mínimo 3:1; sus textos y los mensajes mantienen al menos 4,5:1. Los acentos sobre superficies oscuras usan mint derivado del teal y en claro usan petróleo.
 
 ## Tema y accesibilidad
 
@@ -71,3 +68,7 @@ El enlace Funciones y los iconos del header usan azul noche sobre #F7F9FC/#F4F7F
 Capturas en `tmp/themes/` (ignoradas): `/` y `/inicio`, claro/oscuro, 375, 768 y 1280 px. Chat vacío, cargando, con respuesta y error. También se comprueban reintento sin duplicados, cancelación durante escritura, Funciones, toggle del menú, persistencia y redirección, sin overflow horizontal o superposición del composer. Se corrigieron los títulos de sugerencias y el select en claro tras la primera ronda.
 
 Revisión posterior del header: 18 capturas en `tmp/header/`, ambos temas y 375/768/1280 px, estados vacío, respuesta y error. Se verifica un solo logo visible en escritorio, tono correcto en móvil/tablet, alineación a 76 px, foco y contraste de texto/bordes/iconos.
+
+## Movimiento
+
+`src/styles/motion.css` define entradas breves de mensajes, errores y bienvenida, aparición escalonada de tarjetas, deslizamiento del menú y microinteracciones en botones/iconos. Los colores de superficies, bordes y textos transicionan al cambiar de tema. Las animaciones no bloquean el envío ni reinician respuestas. Se usa fill-mode backwards para permitir hover después de las entradas. Con prefers-reduced-motion se desactivan animaciones, transiciones y desplazamientos decorativos.
