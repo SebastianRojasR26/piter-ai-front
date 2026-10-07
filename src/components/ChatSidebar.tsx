@@ -11,14 +11,19 @@ import {
 } from "lucide-react";
 import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
+import { demoConversations } from "../data/demoConversations";
 export default function ChatSidebar({
   open,
   onClose,
   onReset,
+  onExample,
+  activeExample,
 }: {
   open: boolean;
   onClose: () => void;
   onReset: () => void;
+  onExample?: (id: string) => void;
+  activeExample?: string | null;
 }) {
   const panel = useRef<HTMLElement>(null);
   useEffect(() => {
@@ -86,6 +91,29 @@ export default function ChatSidebar({
           <MessageSquare size={18} /> Asistente PiterAi{" "}
           <ChevronRight size={15} />
         </div>
+        {onExample && (
+          <nav
+            className="demo-conversations"
+            aria-label="Conversaciones de ejemplo"
+          >
+            <p className="sidebar-label">EJEMPLOS · SIN CONSUMIR CUPO</p>
+            {demoConversations.map((example) => (
+              <button
+                key={example.id}
+                className={
+                  activeExample === example.id
+                    ? "demo-conversation selected"
+                    : "demo-conversation"
+                }
+                aria-pressed={activeExample === example.id}
+                onClick={() => onExample(example.id)}
+              >
+                <MessageSquare size={16} aria-hidden="true" />
+                {example.title}
+              </button>
+            ))}
+          </nav>
+        )}
         <div className="sidebar-help">
           <div className="help-icon">
             <BookOpen size={23} />

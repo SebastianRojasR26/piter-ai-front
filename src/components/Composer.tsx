@@ -6,6 +6,7 @@ export default function Composer({
   setDraft,
   status,
   busy,
+  exhausted = false,
   input,
   submit,
 }: {
@@ -13,6 +14,7 @@ export default function Composer({
   setDraft: (draft: string) => void;
   status: ChatStatus;
   busy: boolean;
+  exhausted?: boolean;
   input: RefObject<HTMLTextAreaElement | null>;
   submit: (question: string) => Promise<void>;
 }) {
@@ -45,21 +47,23 @@ export default function Composer({
         placeholder="Escribe tu pregunta tributaria…"
         rows={2}
         maxLength={4000}
-        disabled={busy || status === "error"}
+        disabled={busy || exhausted || status === "error"}
       />
       <div className="composer-bottom">
         <span>
-          {busy
-            ? "Preparando tu respuesta…"
-            : status === "error"
-              ? "Reintenta o elige escribir otra pregunta"
-              : "Enter para enviar · Shift + Enter para un salto"}{" "}
+          {exhausted
+            ? "Cupo de prueba agotado · Reinícialo para continuar"
+            : busy
+              ? "Preparando tu respuesta…"
+              : status === "error"
+                ? "Reintenta o elige escribir otra pregunta"
+                : "Enter para enviar · Shift + Enter para un salto"}{" "}
           {draft.length > 3500 && `· ${draft.length}/4000`}
         </span>
         <button
           type="submit"
           aria-label="Enviar pregunta"
-          disabled={!draft.trim() || busy || status === "error"}
+          disabled={!draft.trim() || busy || exhausted || status === "error"}
         >
           <ArrowUp size={21} />
         </button>
