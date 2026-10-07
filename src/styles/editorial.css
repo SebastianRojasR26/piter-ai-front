@@ -9,6 +9,9 @@
   margin-inline: auto;
 }
 .ed-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
   border-bottom: 1px solid var(--ed-border);
   background: var(--ed-bg);
 }
@@ -288,7 +291,7 @@
 }
 .ed-section {
   padding-block: 90px;
-  scroll-margin-top: 24px;
+  scroll-margin-top: 116px;
 }
 .ed-section-heading {
   display: grid;
@@ -376,7 +379,7 @@
   background: var(--ed-panel);
   padding-block: 80px;
   border-block: 1px solid var(--ed-border);
-  scroll-margin-top: 24px;
+  scroll-margin-top: 116px;
 }
 .ed-plans {
   display: grid;
