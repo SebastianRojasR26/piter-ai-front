@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { isMock, sendMessage } from "../services/chat";
 import { friendlyError } from "../services/errors";
 import type { MockScenario } from "../services/mock";
@@ -11,6 +12,7 @@ import MessageList from "../components/MessageList";
 import Disclaimer from "../components/Disclaimer";
 import { demoConversations } from "../data/demoConversations";
 export default function Chat() {
+  const location = useLocation();
   const [messages, setMessages] = useState<Message[]>([]);
   const [draft, setDraft] = useState("");
   const [status, setStatus] = useState<ChatStatus>("idle");
@@ -27,6 +29,17 @@ export default function Chat() {
   const bottom = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
   const busy = status === "loading" || status === "typing";
+  useEffect(() => {
+    const question: unknown = location.state?.initialQuestion;
+    if (
+      typeof question === "string" &&
+      question.trim() &&
+      question.length <= 4000
+    ) {
+      setDraft(question);
+      input.current?.focus();
+    }
+  }, [location.key, location.state]);
   useEffect(() => {
     document.title = "Asistente tributario · PiterAi";
     const requestGeneration = generation;
