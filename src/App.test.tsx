@@ -5,6 +5,7 @@ import { afterEach, expect, it } from "vitest";
 import App from "./App";
 import Logo from "./components/Logo";
 import ThemeToggle from "./components/ThemeToggle";
+import { chatTopics } from "./data/chatTopics";
 import { fireEvent } from "@testing-library/react";
 afterEach(cleanup);
 it("el tono explícito del logo prevalece al cambiar de tema", () => {
@@ -67,3 +68,25 @@ it("presenta funciones en /inicio con CTAs al chat", () => {
   ).toBe("/");
   expect(document.title).toBe("PiterAi · Claridad para tus impuestos");
 });
+it.each(chatTopics)(
+  "precarga la pregunta de $label sin enviar ni consumir cupo",
+  ({ label, question }) => {
+    render(
+      <MemoryRouter initialEntries={["/inicio"]}>
+        <App />
+      </MemoryRouter>,
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: `Preguntar sobre ${label}` }),
+    );
+    expect(
+      (
+        screen.getByRole("textbox", {
+          name: "Tu pregunta tributaria",
+        }) as HTMLTextAreaElement
+      ).value,
+    ).toBe(question);
+    expect(screen.getByText("5 de 5")).toBeTruthy();
+    expect(screen.queryByText(/Preparando respuesta/)).toBeNull();
+  },
+);

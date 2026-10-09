@@ -72,10 +72,9 @@ summary:focus-visible {
     background 0.2s,
     transform 0.2s;
 }
-.button:hover {
+.button:hover:not(:active) {
   background: var(--accent-strong);
   color: var(--on-strong);
-  transform: translateY(-2px);
 }
 .button.small {
   font-size: 14px;
@@ -149,7 +148,8 @@ summary:focus-visible {
   background: var(--overlay);
 }
 .button:active {
-  transform: translateY(0);
+  transform: scale(0.97);
+  transition: transform 100ms ease-out;
 }
 ::selection {
   background: var(--selection-bg);
@@ -175,4 +175,28 @@ body,
     color 0.2s ease,
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+.logo-mark {
+  display: block;
+  height: auto;
+  aspect-ratio: 1200 / 278;
+  overflow: hidden;
+}
+.logo-tagline {
+  display: block;
+  font-size: 12px;
+  line-height: 1.2;
+  font-family: var(--font-body), sans-serif;
+  letter-spacing: 0;
+  margin-top: 3px;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .button:hover:not(:active) {
+    transform: translateY(-2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button:active {
+    transform: none;
+  }
 }

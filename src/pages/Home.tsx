@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -18,6 +18,7 @@ import Logo from "../components/Logo";
 import ThemeToggle from "../components/ThemeToggle";
 import FaqItem from "../components/FaqItem";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import { chatTopics } from "../data/chatTopics";
 import "../styles/editorial.css";
 const benefits = [
   {
@@ -54,7 +55,10 @@ const plans = [
     price: "$29.900",
     quota: "10 consultas / mes",
     description: "Para dudas puntuales.",
-    features: ["Todo lo incluido en Gratis", "Más consultas cada mes"],
+    features: [
+      "Todo lo incluido en Gratis",
+      "10 consultas al mes (5 más que Gratis)",
+    ],
     recommended: false,
   },
   {
@@ -62,7 +66,10 @@ const plans = [
     price: "$49.900",
     quota: "100 consultas / mes",
     description: "Para tu práctica cotidiana.",
-    features: ["Todo lo incluido en Lite", "Mayor capacidad mensual"],
+    features: [
+      "Todo lo incluido en Lite",
+      "100 consultas al mes (90 más que Lite)",
+    ],
     recommended: true,
   },
   {
@@ -93,17 +100,23 @@ const questions = [
   },
 ];
 export default function Home() {
+  const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const page = useRef<HTMLDivElement>(null);
   useScrollReveal(page);
   useEffect(() => {
     document.title = "PiterAi · Claridad para tus impuestos";
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
     <div className="editorial" ref={page}>
       <header
-        className="ed-header"
+        className={scrolled ? "ed-header is-scrolled" : "ed-header"}
         onKeyDown={(event) => {
           if (event.key === "Escape" && menuOpen) {
             setMenuOpen(false);
@@ -150,7 +163,7 @@ export default function Home() {
         <section className="ed-hero ed-wrap">
           <div className="ed-hero-copy">
             <p className="ed-kicker">
-              <span /> TU IMPULSO TRIBUTARIO
+              <span /> Tu impulso tributario
             </p>
             <h1>
               Tus impuestos.
@@ -226,14 +239,19 @@ export default function Home() {
         <div className="ed-topics">
           <div className="ed-wrap">
             <span>CONVERSEMOS SOBRE</span>
-            {["Renta", "IVA", "Retenciones", "RUT", "Régimen Simple"].map(
-              (topic) => (
-                <span key={topic}>
-                  {topic}
-                  <Plus size={14} aria-hidden="true" />
-                </span>
-              ),
-            )}
+            {chatTopics.map((topic) => (
+              <button
+                type="button"
+                key={topic.label}
+                onClick={() =>
+                  navigate("/", { state: { initialQuestion: topic.question } })
+                }
+                aria-label={`Preguntar sobre ${topic.label}`}
+              >
+                {topic.label}
+                <Plus size={14} aria-hidden="true" />
+              </button>
+            ))}
           </div>
         </div>
         <section className="ed-section ed-wrap" id="funciones">

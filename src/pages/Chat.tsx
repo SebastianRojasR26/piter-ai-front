@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { isMock, sendMessage } from "../services/chat";
 import { friendlyError } from "../services/errors";
 import type { MockScenario } from "../services/mock";
@@ -9,13 +10,17 @@ import ChatWelcome from "../components/ChatWelcome";
 import Composer from "../components/Composer";
 import MessageList from "../components/MessageList";
 import Disclaimer from "../components/Disclaimer";
+import { demoConversations } from "../data/demoConversations";
 export default function Chat() {
+  const location = useLocation();
   const [messages, setMessages] = useState<Message[]>([]);
   const [draft, setDraft] = useState("");
   const [status, setStatus] = useState<ChatStatus>("idle");
   const [error, setError] = useState("");
   const [scenario, setScenario] = useState<MockScenario>("normal");
   const [sidebar, setSidebar] = useState(false);
+  const [available, setAvailable] = useState(5);
+  const [activeExample, setActiveExample] = useState<string | null>(null);
   const conversation = useRef<string | null>(null);
   const lastQuestion = useRef("");
   const controller = useRef<AbortController | null>(null);
@@ -24,6 +29,17 @@ export default function Chat() {
   const bottom = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLTextAreaElement>(null);
   const busy = status === "loading" || status === "typing";
+  useEffect(() => {
+    const question: unknown = location.state?.initialQuestion;
+    if (
+      typeof question === "string" &&
+      question.trim() &&
+      question.length <= 4000
+    ) {
+      setDraft(question);
+      input.current?.focus();
+    }
+  }, [location.key, location.state]);
   useEffect(() => {
     document.title = "Asistente tributario · PiterAi";
     const requestGeneration = generation;
@@ -37,6 +53,7 @@ export default function Chat() {
     bottom.current?.scrollIntoView({ behavior: "instant", block: "end" });
   }, [messages, status]);
   function reset() {
+    setActiveExample(null);
     generation.current++;
     controller.current?.abort();
     if (typingTimer.current) clearInterval(typingTimer.current);
@@ -49,9 +66,22 @@ export default function Chat() {
     setSidebar(false);
     input.current?.focus();
   }
+  function openExample(id: string) {
+    const example = demoConversations.find((item) => item.id === id);
+    if (!example) return;
+    reset();
+    setActiveExample(id);
+    setMessages(example.messages.map((message) => ({ ...message })));
+  }
   async function submit(question: string, retry = false) {
     const text = question.trim();
-    if (!text || text.length > 4000 || busy || (status === "error" && !retry))
+    if (
+      !text ||
+      text.length > 4000 ||
+      busy ||
+      (isMock && available === 0) ||
+      (status === "error" && !retry)
+    )
       return;
     const current = ++generation.current;
     controller.current?.abort();
@@ -74,6 +104,7 @@ export default function Chat() {
         controller.current.signal,
       );
       if (current !== generation.current) return;
+      if (isMock) setAvailable((prev) => Math.max(0, prev - 1));
       conversation.current = result.conversation_id;
       const id = crypto.randomUUID();
       const reduced = window.matchMedia(
@@ -116,6 +147,8 @@ export default function Chat() {
         open={sidebar}
         onClose={() => setSidebar(false)}
         onReset={reset}
+        onExample={isMock ? openExample : undefined}
+        activeExample={activeExample}
       />
       <div className="chat-main">
         <ChatHeader
@@ -128,7 +161,10 @@ export default function Chat() {
           aria-label="Conversación con PiterAi"
         >
           {messages.length === 0 ? (
-            <ChatWelcome busy={busy} submit={submit} />
+            <ChatWelcome
+              busy={busy || (isMock && available === 0)}
+              submit={submit}
+            />
           ) : (
             <MessageList
               messages={messages}
@@ -145,6 +181,21 @@ export default function Chat() {
           )}
         </main>
         <div className="composer-area">
+          {isMock && (
+            <div className="demo-quota">
+              <p role="status" aria-live="polite">
+                <strong>{available} de 5</strong> consultas disponibles{" "}
+                <span>· Cupo de demostración</span>
+              </p>
+              {available === 0 ? (
+                <button onClick={() => setAvailable(5)}>
+                  Reiniciar cupo de prueba
+                </button>
+              ) : (
+                <span>Los ejemplos no consumen consultas.</span>
+              )}
+            </div>
+          )}
           {isMock && (
             <details className="mock-controls">
               <summary>Controles de demostración</summary>
@@ -174,6 +225,7 @@ export default function Chat() {
             setDraft={setDraft}
             status={status}
             busy={busy}
+            exhausted={isMock && available === 0}
             input={input}
             submit={submit}
           />

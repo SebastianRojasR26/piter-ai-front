@@ -580,3 +580,67 @@
     opacity: 0.35;
   }
 }
+.sidebar {
+  overflow-y: auto;
+}
+.demo-conversations {
+  margin-block: 10px;
+}
+.demo-conversations .sidebar-label {
+  margin: 12px 0 8px;
+  letter-spacing: 1px;
+}
+.demo-conversation {
+  width: 100%;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 12px 8px;
+  min-height: 44px;
+  background: var(--clear);
+  border: 1px solid var(--clear);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  text-align: left;
+}
+.demo-conversation svg {
+  flex-shrink: 0;
+}
+.demo-conversation:hover {
+  background: var(--overlay);
+  color: var(--text);
+}
+.demo-conversation.selected {
+  background: var(--active-bg);
+  border-color: var(--active-border);
+  color: var(--active-text);
+}
+.demo-quota {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: var(--chat-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.demo-quota strong {
+  color: var(--chat-accent-text);
+}
+.demo-quota > span {
+  font-size: 11px;
+}
+.demo-quota button {
+  background: var(--clear);
+  color: var(--chat-accent-text);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+}
+.demo-quota button:hover {
+  background: var(--chat-surface);
+}

@@ -32,3 +32,19 @@
 Claro y oscuro comparten todas las pantallas y estados. Todo el chat, incluido header, mensajes, controles y composer, cambia de tema. En escritorio mide 76 px, alineado con la marca lateral, y muestra «Asistente tributario» + chip Colombia; el único logo está en la barra lateral. Hasta 900 px el logo del header acompaña el tema. Funciones y el toggle siguen visibles, con el badge en una segunda fila en móvil para evitar overflow. Capturas de vacío, respuesta y error en `tmp/header/` a 375/768/1280 px, ambos temas. El menú móvil permite Escape, ciclo de foco y regreso al botón de apertura. Tokens y contrastes: [design-tokens.md](design-tokens.md).
 
 Entradas animadas de bienvenida, tarjetas, mensajes y errores; hover y pulsación en botones; apertura del menú. Todas se desactivan con movimiento reducido.
+
+## Ejemplos y cupo local
+
+La barra lateral del chat en mock ofrece tres conversaciones precargadas: renta, RUT y retenciones. Abrir un ejemplo cancela solicitudes/escritura pendientes, muestra mensajes ilustrativos y no consume consultas. Se puede continuar la conversación usando el mock habitual.
+
+El cupo empieza en 5 consultas por visita al chat. Solo una respuesta correcta descuenta una consulta; errores y solicitudes canceladas no consumen. Nueva conversación y ejemplos no reponen el cupo. Al llegar a cero se desactiva el envío y se ofrece reiniciar el cupo de prueba. Al recargar o volver a montar la pantalla también se reinicia; no representa facturación ni un límite real del backend. En modo API estos controles no aparecen.
+
+La cabecera de la Home es sticky y las anclas conservan espacio superior para que los títulos no queden debajo. El header del chat permanece visible mientras solo se desplaza el área de mensajes.
+
+## Auditoría puntual de la landing
+
+Los botones de temas abren `/` con una pregunta en el composer mediante estado de navegación; no envían ni descuentan cupo hasta confirmar. La cabecera usa transparencia y blur de 18px, con sombra solo después de 8px de scroll. Fondo sólido con transparencia reducida; borde definido con contraste aumentado. El nav tiene 44px de alto mínimo.
+
+Eyebrows/metadatos: mínimo 12px; avisos legales: 13px, usando los tokens con contraste AA. Los planes comparan cantidades reales (10 frente a 5 y 100 frente a 10); no se añaden prestaciones. El logo conserva su marca gráfica recortando el lema incrustado y representa «Tu impulso tributario» como texto editable. Los eyebrows usan text-transform para mayúsculas.
+
+Pulsación de CTAs: scale(0.97), 100ms ease-out; elevación hover solo con puntero que admite hover. Movimiento reducido elimina transformaciones. Verificación en `tmp/audit-{tema}-{390|1440}.png`, pruebas de temas en `App.test.tsx` y controles manuales de transparencia/contraste.
