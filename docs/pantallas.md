@@ -40,3 +40,11 @@ La barra lateral del chat en mock ofrece tres conversaciones precargadas: renta,
 El cupo empieza en 5 consultas por visita al chat. Solo una respuesta correcta descuenta una consulta; errores y solicitudes canceladas no consumen. Nueva conversación y ejemplos no reponen el cupo. Al llegar a cero se desactiva el envío y se ofrece reiniciar el cupo de prueba. Al recargar o volver a montar la pantalla también se reinicia; no representa facturación ni un límite real del backend. En modo API estos controles no aparecen.
 
 La cabecera de la Home es sticky y las anclas conservan espacio superior para que los títulos no queden debajo. El header del chat permanece visible mientras solo se desplaza el área de mensajes.
+
+## Auditoría puntual de la landing
+
+Los botones de temas abren `/` con una pregunta en el composer mediante estado de navegación; no envían ni descuentan cupo hasta confirmar. La cabecera usa transparencia y blur de 18px, con sombra solo después de 8px de scroll. Fondo sólido con transparencia reducida; borde definido con contraste aumentado. El nav tiene 44px de alto mínimo.
+
+Eyebrows/metadatos: mínimo 12px; avisos legales: 13px, usando los tokens con contraste AA. Los planes comparan cantidades reales (10 frente a 5 y 100 frente a 10); no se añaden prestaciones. El logo conserva su marca gráfica recortando el lema incrustado y representa «Tu impulso tributario» como texto editable. Los eyebrows usan text-transform para mayúsculas.
+
+Pulsación de CTAs: scale(0.97), 100ms ease-out; elevación hover solo con puntero que admite hover. Movimiento reducido elimina transformaciones. Verificación en `tmp/audit-{tema}-{390|1440}.png`, pruebas de temas en `App.test.tsx` y controles manuales de transparencia/contraste.

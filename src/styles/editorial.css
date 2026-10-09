@@ -12,8 +12,13 @@
   position: sticky;
   top: 0;
   z-index: 30;
-  border-bottom: 1px solid var(--ed-border);
-  background: var(--ed-bg);
+  border-bottom: 1px solid var(--clear);
+  background: var(--ed-header-glass);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+}
+.ed-header.is-scrolled {
+  box-shadow: var(--ed-header-shadow);
 }
 .ed-nav {
   min-height: 96px;
@@ -77,9 +82,10 @@
   align-items: center;
 }
 .ed-kicker {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1.8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -129,13 +135,13 @@
     transform 180ms ease,
     background-color 180ms ease;
 }
-.ed-button:hover {
-  transform: translateY(-3px);
+.ed-button:hover:not(:active) {
   background: var(--ed-accent-hover);
   color: var(--ed-on-hover);
 }
 .ed-button:active {
-  transform: translateY(0);
+  transform: scale(0.97);
+  transition: transform 100ms ease-out;
 }
 .ed-text-link {
   font-weight: 600;
@@ -162,7 +168,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   font-weight: 600;
   padding-bottom: 22px;
@@ -201,7 +207,7 @@
 }
 .ed-status {
   margin-left: auto;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--ed-accent);
   background: var(--ed-panel);
   padding: 5px 9px;
@@ -239,7 +245,7 @@
   padding-block: 12px;
   border-top: 1px solid var(--ed-border);
   color: var(--ed-muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 .ed-demo-input {
   margin: 0 20px 20px;
@@ -261,7 +267,7 @@
   display: flex;
   justify-content: space-between;
   color: var(--ed-muted);
-  font-size: 11px;
+  font-size: 12px;
   padding-top: 20px;
 }
 .ed-topics {
@@ -282,7 +288,7 @@
   font-size: 15px;
 }
 .ed-topics span:first-child {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   color: var(--ed-muted);
 }
@@ -408,7 +414,7 @@
   font-size: 25px;
 }
 .ed-plan-label > span {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   border-radius: 100px;
   padding: 5px 8px;
@@ -547,7 +553,6 @@
     border-color 180ms ease;
 }
 .ed-plan:hover {
-  transform: translateY(-4px);
   border-color: var(--ed-accent);
 }
 @media (max-width: 1050px) {
@@ -632,7 +637,7 @@
     border-radius: 20px;
   }
   .ed-demo-label {
-    font-size: 9px;
+    font-size: 12px;
     gap: 7px;
   }
   .ed-topics > div {
@@ -714,7 +719,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .ed-plan:hover,
-  .ed-button:hover {
+  .ed-button:hover:not(:active) {
     transform: none;
   }
 }
@@ -804,8 +809,72 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ed-plan:hover,
   .ed-plan.ed-reveal.ed-revealed:hover {
     transform: translateY(-4px);
+  }
+}
+.ed-links > a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding-block: 10px;
+}
+.ed-kicker,
+.ed-demo-label {
+  letter-spacing: 0.08em;
+}
+.ed-small,
+.ed-pricing-note,
+.ed-closing p,
+.ed-demo-notice {
+  font-size: 13px;
+}
+.ed-demo-label {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+.ed-topics button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--ed-border);
+  border-radius: 100px;
+  background: var(--ed-card);
+  color: var(--ed-text);
+  font-size: 15px;
+}
+.ed-topics button:hover {
+  border-color: var(--ed-accent);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ed-button:hover:not(:active) {
+    transform: translateY(-3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ed-button:active {
+    transform: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .ed-header {
+    background: var(--ed-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+@media (prefers-contrast: more) {
+  .ed-header {
+    background: var(--ed-bg);
+    border-bottom-color: var(--ed-muted);
+  }
+}
+@supports not (backdrop-filter: blur(18px)) {
+  .ed-header {
+    background: var(--ed-bg);
   }
 }

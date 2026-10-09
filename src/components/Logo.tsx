@@ -15,14 +15,17 @@ export default function Logo({
       aria-label="PiterAi, asistente tributario"
       onClick={onClick}
     >
-      <img
-        src={
-          (tone ? tone === "on-dark" : theme === "dark")
-            ? "/brand/logo-horizontal-white.png"
-            : "/brand/logo-horizontal.png"
-        }
-        alt="PiterAi · Tu impulso Tributario"
-      />
+      <span className="logo-mark">
+        <img
+          src={
+            (tone ? tone === "on-dark" : theme === "dark")
+              ? "/brand/logo-horizontal-white.png"
+              : "/brand/logo-horizontal.png"
+          }
+          alt="PiterAi"
+        />
+      </span>
+      <span className="logo-tagline">Tu impulso tributario</span>
     </Link>
   );
 }

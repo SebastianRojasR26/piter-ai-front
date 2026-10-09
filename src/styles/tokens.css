@@ -99,6 +99,8 @@
   --ed-accent-hover: var(--brand-petroleum);
   --ed-on-accent: var(--brand-night);
   --ed-on-hover: var(--white);
+  --ed-header-glass: #0a1738d9;
+  --ed-header-shadow: 0 8px 24px #00000026;
 }
 
 [data-theme="light"] {
@@ -155,6 +157,8 @@
   --ed-muted: var(--text-muted);
   --ed-border: var(--border);
   --ed-accent: var(--brand-petroleum);
+  --ed-header-glass: #f4f7fbd9;
+  --ed-header-shadow: 0 8px 24px #14305712;
 }
 
 /* Contextos de lectura: reutilizan los mismos roles semánticos de componentes. */
